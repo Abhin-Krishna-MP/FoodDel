@@ -15,12 +15,25 @@ function storeContextProvider({children}){
     const removeFromCart=(itemId)=>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
     }
+
+    const getTotalAmount = ()=>{
+        let totalAmount = 0
+        for(const item in CartItems){
+            if (CartItems[item] > 0) {
+                let itemInfo = food_list.find((product) => product._id === item)
+                totalAmount += itemInfo.price * CartItems[item]
+            }
+        }
+        return totalAmount
+    }
+
     const contextValue={
         food_list,
         CartItems,
         setCartItems,
         addToCart,
-        removeFromCart
+        removeFromCart,
+        getTotalAmount
     }
     return(
     <storeContext.Provider value={contextValue}>
