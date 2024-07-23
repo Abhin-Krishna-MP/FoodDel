@@ -1,9 +1,9 @@
 import React from 'react'
 import './Add.css'
 import AddDesign from '../../components/AddDesign/AddDesign'
-const Add = () => {
+const Add = ({url}) => {
   return (
-      <AddDesign/>
+      <AddDesign url={url}/>
   )
 }
 

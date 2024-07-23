@@ -1,20 +1,55 @@
 import { createContext,useState } from "react";
-import {food_list} from '../assets/assets'
+import { useEffect } from "react";
+import axios from "axios";
 export const storeContext = createContext(null)
 
 function storeContextProvider({children}){
     const [CartItems, setCartItems] = useState({})
-    const addToCart = (itemId)=>{
+    const [food_list, setfoodData] = useState([])
+    const url = "http://localhost:4000"
+    const [Token, setToken] = useState("")
+    const [userName, setuserName] = useState('')
+
+    const addToCart = async(itemId)=>{
         if(!CartItems[itemId]){
             setCartItems((prev)=>({...prev,[itemId]:1}))
         }else{
             setCartItems((prev)=>({...prev,[itemId]:prev[itemId]+1}))
         }
+        if({Token}){
+            await axios.post(`${url}/api/cart/add`,{itemId},{headers:{Token}})
+        }
     }
     
-    const removeFromCart=(itemId)=>{
+    const removeFromCart= async(itemId)=>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
+        if({Token}){
+            await axios.post(`${url}/api/cart/remove`,{itemId},{headers:{Token}})
+        }
     }
+
+    const loadCartData = async (token)=>{
+        const response = await axios.post(url+"/api/cart/get",{},{headers:{token}})
+        setCartItems(response.data.cartData)
+    }
+
+    const fetchData = async()=>{
+        const foodList = await axios.get(`${url}/api/food/list`)
+        setfoodData(foodList.data.data)
+        console.log(foodList.data.data)
+    }
+
+    useEffect(() => {
+        async function loadData(){
+            if(localStorage.getItem('token')){
+                setToken(localStorage.getItem('token'))
+                setuserName(localStorage.getItem('name'))
+            }
+            await fetchData()
+            await loadCartData(localStorage.getItem("token"))
+        }
+        loadData()
+    }, [])
 
     const getTotalAmount = ()=>{
         let totalAmount = 0
@@ -33,7 +68,13 @@ function storeContextProvider({children}){
         setCartItems,
         addToCart,
         removeFromCart,
-        getTotalAmount
+        getTotalAmount,
+        url,
+        Token,
+        setToken,
+        userName,
+        setuserName,
+        loadCartData
     }
     return(
     <storeContext.Provider value={contextValue}>

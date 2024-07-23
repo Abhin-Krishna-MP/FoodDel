@@ -3,7 +3,7 @@ import './CartDesign.css'
 import { storeContext } from '../../Context/StoreContext'
 import {useNavigate} from 'react-router-dom'
 const CartDesign = () => {
-    const {food_list,CartItems,removeFromCart,getTotalAmount}= useContext(storeContext)
+    const {food_list,url,CartItems,removeFromCart,getTotalAmount}= useContext(storeContext)
     const navigate = useNavigate()
   return (
     <div className='cart'>
@@ -23,7 +23,7 @@ const CartDesign = () => {
                     return (
                         <div  key={index}>
                             <div className="cart-items-title cart-items-item">
-                                <img src={item.image} alt="" />
+                                <img src={url+"/images/"+item.image} alt="" />
                                 <p>{item.name}</p>
                                 <p>${item.price}</p>
                                 <p>{CartItems[item._id]}</p>

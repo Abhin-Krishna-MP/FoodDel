@@ -1,10 +1,9 @@
 import React from 'react'
 import './List.css'
-const List = () => {
+import ListDesign from '../../components/ListDesign/ListDesign'
+const List = ({url}) => {
   return (
-    <div>
-
-    </div>
+    <ListDesign url={url}/>
   )
 }
 

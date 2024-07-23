@@ -3,7 +3,7 @@ import './AddDesign.css'
 import { assets } from '../../assets/assets'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-const AddDesign = () => {
+const AddDesign = ({url}) => {
     const [image, setImage] = useState(false)
     const [Data, setData] = useState({
         name:"",
@@ -11,12 +11,8 @@ const AddDesign = () => {
         price:"",
         category:"Salad"
     })
-    useEffect(() => {
-      console.log(Data)
-    }, [Data])
     const onSubmitHandler = async(e)=>{
         e.preventDefault()
-        const url = "http://localhost:4000"
         const formData = new FormData()
         formData.append('name',Data.name)
         formData.append('description',Data.description)
@@ -29,7 +25,7 @@ const AddDesign = () => {
                 name: "",
                 description: "",
                 price: "",
-                category: "Salad"
+                category:Data.category
             })
             setImage(false)
             toast.success(response.data.message)
