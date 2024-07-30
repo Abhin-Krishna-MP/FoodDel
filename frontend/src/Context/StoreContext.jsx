@@ -63,7 +63,6 @@ function storeContextProvider({children}){
     }
 
     const contextValue={
-        food_list,
         CartItems,
         setCartItems,
         addToCart,
@@ -74,7 +73,8 @@ function storeContextProvider({children}){
         setToken,
         userName,
         setuserName,
-        loadCartData
+        loadCartData,
+        food_list
     }
     return(
     <storeContext.Provider value={contextValue}>
