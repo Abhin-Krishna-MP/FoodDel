@@ -99,8 +99,8 @@ const OrderDesign = () => {
       <div className="place-order-left">
         <p className="title">Delivery Information</p>
         <div className="multi-fields">
-          <input onChange={onChangeHandler} required name='lastName' value={Data.lastName} type="text" placeholder='Last name' />
           <input onChange={onChangeHandler} required name='firstName' value={Data.firstName}  type="text" placeholder='First name' />
+          <input onChange={onChangeHandler} required name='lastName' value={Data.lastName} type="text" placeholder='Last name' />
         </div>
         <input onChange={onChangeHandler} required name='street' value={Data.street} type="text" placeholder='Street' />
         <input onChange={onChangeHandler} required name='email' value={Data.email} type="email" placeholder='Email address' />
