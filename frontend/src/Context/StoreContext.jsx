@@ -6,7 +6,7 @@ export const storeContext = createContext(null)
 function storeContextProvider({children}){
     const [CartItems, setCartItems] = useState({})
     const [food_list, setfoodData] = useState([])
-    const url = "http://localhost:4000"
+    const url = "https://fooddel-backend-bfgz.onrender.com"
     const [Token, setToken] = useState("")
     const [userName, setuserName] = useState('')
 
